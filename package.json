@@ -1,0 +1,35 @@
+{
+  "name": "discbot",
+  "version": "0.0.0",
+  "description": "A discourse bot",
+  "main": "src/robot.coffee",
+  "bin": {
+    "discbot": "./bin/discbot"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "keywords": [
+    "discourse",
+    "bot"
+  ],
+  "author": "Kerry Liu",
+  "license": "MIT",
+  "dependencies": {
+    "coffee-script": "^1.9.1",
+    "log": "^1.4.0",
+    "node-uuid": "^1.4.3",
+    "q": "^1.2.0",
+    "request": "^2.53.0",
+    "require-dir": "^0.1.0"
+  },
+  "devDependencies": {
+    "chai": "^2.1.1",
+    "faker": "^2.1.2",
+    "mocha": "^2.2.0",
+    "nock": "^1.1.0"
+  }
+}

@@ -1,0 +1,47 @@
+#!/usr/bin/env coffee
+
+requireDir = require 'require-dir'
+Robot = require '../src/robot'
+Discourse = require '../src/discourse'
+
+scripts = requireDir('../src/scripts')
+url = process.env.DISCBOT_URL or 'http://localhost:3000'
+username = process.env.DISCBOT_USERNAME
+password = process.env.DISCBOT_PASSWORD
+
+unless url? and username? and password?
+  console.log 'Environment variables DISCBOT_URL, DISCBOT_USERNAME and DISCBOT_PASSWORD must be set'
+  process.exit 0
+
+try
+  client = new Discourse({
+    url
+    username
+    password
+  })
+
+  #TODO: finish a brain implementation
+  brain = {}
+
+  #TODO: hardcoded filter for now, remove this later
+  filters = {
+    category_id: 9
+  }
+  robot = new Robot({client, brain, filters})
+
+  for key, value of scripts
+    console.log "installing #{key} script to robot..."
+    value(robot)
+
+  robot.start()
+
+  # idles until it's killed!
+  process.stdin.resume();
+
+  process.on 'SIGINT', ->
+    robot.stop()
+    process.exit 0
+
+catch e
+  console.log e
+  process.exit 1
