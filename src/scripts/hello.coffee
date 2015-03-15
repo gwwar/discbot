@@ -1,4 +1,8 @@
-# replies back to greetings
+# Description:
+#  discbot will say hello to you
+#
+# Commands:
+#   @discbot hello - discbot will respond with a greeting
 
 module.exports = (robot) ->
 
