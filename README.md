@@ -7,6 +7,8 @@ make sure you own your discourse instance, or have permission to run this bot.
 
 Not much but discbot will reply to you if you say the magic words. Think of hubot but async and slower.
 
+![](http://i.imgur.com/PmLyOqa.png)
+
 ## Setup
 
 ### Install Discourse (skip this step if you have a simple script to add)
@@ -31,20 +33,20 @@ export DISCBOT_PASSWORD=<bot-password>
 npm install
 ```
 
-## To Run Locally:
+### To Run Locally:
 
 In your checkout folder:
 ```
 ./bin/discbot
 ```
 
-## Run Tests
+### Run Tests
 
 ```
 npm test
 ```
 
-## Running discbot in Heroku
+### Running discbot in Heroku
 * Push discbot to your heroku remote repo
 * Setup the following environment variables in heroku:
 ```
