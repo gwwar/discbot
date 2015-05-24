@@ -17,6 +17,7 @@ rollDice = (post, match) ->
   modifier = match[3]
   modifierValue = parseInt(match[4], 10) or 0
   extraText = match[5].trim()
+  message = ""
 
   if (0 < sides < 1000000) and (0 < dice < 100)
     rolls = [1..dice]
@@ -46,7 +47,7 @@ rollDice = (post, match) ->
     if rolls.length > 1
       message += " (#{rolls.join()})"
 
-    return message
+  return message
 
 
 module.exports = (robot) ->
@@ -63,3 +64,5 @@ module.exports = (robot) ->
 
     if message.length>0
       post.reply message
+    else
+      post.reply "![disbot](/uploads/default/original/f/7/f78876fd43f77876a3e52e9e070dbf5414250b0d.gif)"

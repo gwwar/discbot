@@ -1,4 +1,4 @@
-expect = require('chai').expect
+{expect} = require 'chai'
 dice = require '../../src/scripts/dice'
 TestRobot = require '../test_robot'
 
@@ -16,8 +16,6 @@ describe 'scripts/dice', ->
     # simulate a user responding to the bot
     promise = robot.test message: "roll d1"
 
-    promise.fail (error) ->
-      throw new Error(error)
     promise.then (message) ->
       expect(message).to.equal "@defaultname the d1 dice reads: 1"
 
@@ -25,8 +23,6 @@ describe 'scripts/dice', ->
     # simulate a user responding to the bot
     promise = robot.test message: "roll d20"
 
-    promise.fail (error) ->
-      throw new Error(error)
     promise.then (message) ->
       expect(message).to.match /@defaultname the d20 dice reads: \d+/
 
@@ -34,8 +30,6 @@ describe 'scripts/dice', ->
       # simulate a user responding to the bot
     promise = robot.test message: "roll 2d20"
 
-    promise.fail (error) ->
-      throw new Error(error)
     promise.then (message) ->
       expect(message).to.match /@defaultname the 2d20 dice reads: \d+ \(\d+,\d+\)/
 
@@ -43,8 +37,6 @@ describe 'scripts/dice', ->
     # simulate a user responding to the bot
     promise = robot.test message: "roll 2d20+5"
 
-    promise.fail (error) ->
-      throw new Error(error)
     promise.then (message) ->
       expect(message).to.match /@defaultname the 2d20\+5 dice reads: \d+ \(\d+,\d+\)/
 
@@ -52,10 +44,15 @@ describe 'scripts/dice', ->
       # simulate a user responding to the bot
     promise = robot.test message: "roll 2d20-5"
 
-    promise.fail (error) ->
-      throw new Error(error)
     promise.then (message) ->
       expect(message).to.match /@defaultname the 2d20-5 dice reads: -?\d+ \(\d+,\d+\)/
+
+  it 'refuses to roll imaginary dice', ->
+    # simulate a user responding to the bot
+    promise = robot.test message: "roll d0 for imaginary numbers"
+
+    promise.then (message) ->
+      expect(message).to.equal '![disbot](/uploads/default/original/f/7/f78876fd43f77876a3e52e9e070dbf5414250b0d.gif)'
 
   it 'refuses to roll 100 dice', ->
     # simulate a user responding to the bot
@@ -68,8 +65,6 @@ describe 'scripts/dice', ->
     # simulate a user responding to the bot
     promise = robot.test message: "roll 2d9+2 thunder damage"
 
-    promise.fail (error) ->
-      throw new Error(error)
     promise.then (message) ->
       expect(message).to.match /@defaultname the 2d9\+2 dice reads: \d+ thunder damage \(\d+,\d+\)/
 
@@ -77,8 +72,6 @@ describe 'scripts/dice', ->
 
     promise = robot.test message: "roll 2d9+2 thunder damage\n roll d5 will \n roll d1 freebie"
 
-    promise.fail (error) ->
-      throw new Error(error)
     promise.then (message) ->
       expect(message).to.match /@defaultname the 2d9\+2 dice reads: \d+ thunder damage \(\d+,\d+\)\n@defaultname the d5 dice reads: \d will\n@defaultname the d1 dice reads: 1 freebie/
 

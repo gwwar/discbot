@@ -16,7 +16,5 @@ describe 'scripts/hello', ->
     # simulate a user responding to the bot
     promise = robot.test message: "hello"
 
-    promise.fail (error) ->
-      throw new Error(error)
     promise.then (message) ->
       expect(message).to.match /@defaultname/
