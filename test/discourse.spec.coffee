@@ -7,7 +7,7 @@ username = process.env.DISCBOT_USERNAME
 password = process.env.DISCBOT_PASSWORD
 testuser = process.env.DISCBOT_TESTUSER # another user account you own
 
-# uncomment this x to run this integration test. Beware! You should only run this against a discourse instance you own.
+# remove this x to run this integration test. Beware! You should only run this against a discourse instance you own.
 xdescribe 'Discourse', ->
   {discourse} = {}
 

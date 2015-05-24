@@ -1,4 +1,4 @@
-request = require 'request'
+request = require('request')
 Q = require 'q'
 winston = require 'winston'
 
@@ -12,7 +12,7 @@ class Discourse
     @r = request.defaults({
       jar : @jar
       headers : {
-        'User-Agent' : 'Discbot v 0.0.0'
+        'User-Agent' : 'discbot v 0.0.0'
         'X-Requested-With': 'XMLHttpRequest'
       }
     })
@@ -59,6 +59,7 @@ class Discourse
           else
             deferred.resolve(body)
         catch e
+          winston.info body
           deferred.reject(e)
 
     promise = deferred.promise
@@ -71,8 +72,11 @@ class Discourse
   _csrf: ->
     @_get("#{@url}/session/csrf").then (body) =>
       @csrf = body.csrf
-      @r = @r.defaults({
-        headers: {
+      @r = request.defaults({
+        jar : @jar
+        headers : {
+          'User-Agent' : 'discbot v 0.0.0'
+          'X-Requested-With': 'XMLHttpRequest'
           'X-CSRF-Token': @csrf
         }
       })

@@ -2,7 +2,7 @@ expect = require('chai').expect
 hello = require '../../src/scripts/hello'
 TestRobot = require '../test_robot'
 
-describe 'scripts/dice', ->
+describe 'scripts/hello', ->
 
   {robot} = {}
 

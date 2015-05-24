@@ -22,10 +22,11 @@ try
     password
   })
 
-  #TODO: hardcoded filter for now, remove this later
-  filters = {
-    category_id: 9
-  }
+  filters = {}
+  # if this is set discbot is limited to this category id
+  if process.env.DISCBOT_FILTER_CATEGORY?
+    filters.category_id = parseInt(process.env.DISCBOT_FILTER_CATEGORY,10)
+
   robot = new Robot({client, filters})
 
   for key, value of scripts
@@ -37,12 +38,12 @@ try
   process.nextTick ->
     robot.start()
 
-  # idles until it's killed!
-  process.stdin.resume();
+    # idles until it's killed!
+    process.stdin.resume();
 
-  process.on 'SIGINT', ->
-    robot.stop()
-    process.exit 0
+    process.on 'SIGINT', ->
+      robot.stop()
+      process.exit 0
 
 catch e
   winston.error "unexpected error", e
