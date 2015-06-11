@@ -1,4 +1,4 @@
-# discbot
+# discbot ![](https://travis-ci.org/gwwar/discbot.svg?branch=master)
 
 An extensible discourse bot, great for rolling dice, and silly games. Be responsible! Before using, 
 make sure you own your discourse instance, or have permission to run this bot.
