@@ -113,8 +113,29 @@ class Robot
               reply_to_post_number: body.post_number
             })
         else if notification.slug? and notification.topic_id?
-          #TODO: work around the fact that the first pm has a null post_id for some reason
-          winston.info 'Attempted to speak to bot in first PM', notification
+          # first pm message to bot
+          d = Q.defer()
+          promises.push d.promise
+          self.client.getTopic({topic_id: notification.topic_id}).then(
+            (body) ->
+              post = body.post_stream.posts[0]
+              self.client.getPost({post_id: post.id}).then(
+                (body) ->
+                  posts.push new Post({
+                    client: self.client
+                    username: body.username
+                    message: body.raw
+                    topic_id: body.topic_id
+                    category: body.category_id
+                    reply_to_post_number: body.post_number
+                  })
+                  d.resolve(body)
+                ,
+                (body) -> d.reject(body)
+              )
+            ,
+            (body) -> d.reject(body)
+          )
 
       Q.allSettled(promises).then ->
         for post in posts

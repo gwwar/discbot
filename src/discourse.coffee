@@ -124,9 +124,9 @@ class Discourse
     @loginPromise.then =>
       @_get "#{@url}/posts/#{post_id}.json"
 
-  getTopic: ({topic_id, slug}) ->
+  getTopic: ({topic_id}) ->
     @loginPromise.then =>
-      @_get "#{@url}/t/#{slug}/#{topic_id}.json"
+      @_get "#{@url}/t/#{topic_id}.json"
 
 #  Filter values correspond to the following:
 #  Discbot currently listens to responses, mentions, and received private messages
