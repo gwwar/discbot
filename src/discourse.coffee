@@ -12,7 +12,7 @@ class Discourse
     @r = request.defaults({
       jar : @jar
       headers : {
-        'User-Agent' : 'discbot v 0.0.0'
+        'User-Agent' : 'discbot v 0.1.0'
         'X-Requested-With': 'XMLHttpRequest'
       }
     })

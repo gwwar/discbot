@@ -29,6 +29,7 @@ xdescribe 'Discourse', ->
     expect(discourse.password).to.equal password
 
   it 'can login', ->
+    this.timeout(5000)
     discourse.loginPromise.then((body) ->
       expect(body.user.username).to.equal username
     ).fail () ->
@@ -39,6 +40,7 @@ xdescribe 'Discourse', ->
       throw new Error("Cannot see latest notifications")
 
   it 'can send a pm', ->
+    this.timeout(5000)
     title = faker.lorem.sentences(1)
     message = faker.lorem.sentences(5)
 
@@ -46,6 +48,7 @@ xdescribe 'Discourse', ->
       throw new Error("Cannot send a pm")
 
   it 'can create a topic', ->
+    this.timeout(5000)
     title = faker.lorem.sentences(1)
     message = faker.lorem.sentences(5)
     discourse.createTopic({
