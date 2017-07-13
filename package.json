@@ -17,7 +17,7 @@
     "bot"
   ],
   "engines": {
-    "node": "6.3.1"
+    "node": "6.11.1"
   },
   "author": "Kerry Liu",
   "license": "MIT",
